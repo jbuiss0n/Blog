@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0-preview1-35029" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jbuisson.Blog.Core\Jbuisson.Blog.Core.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Data.EntityFramework\Jbuisson.Blog.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Data\Jbuisson.Blog.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+<div class="blog-post" *ngFor="let post of Posts">
+  <h2 class="blog-post-title"><a [routerLink]="['/', post.canonicalTitle]">{{ post.title }}</a></h2>
+  <p class="blog-post-meta">{{ post.publishedAt | date }}</p>
+  <p [innerHtml]="post.preview"></p>
+  <hr>
+  <p>{{ post.viewsCount }} views - <a [routerLink]="['/', post.canonicalTitle]" fragment="comments">{{ post.commentsCount }} comments</a></p>
+</div><!-- /.blog-post -->

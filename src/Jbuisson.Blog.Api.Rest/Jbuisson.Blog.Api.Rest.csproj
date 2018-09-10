@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0-preview1-35029" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jbuisson.Blog.Core.Command\Jbuisson.Blog.Core.Command.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Core.Query\Jbuisson.Blog.Core.Query.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Core\Jbuisson.Blog.Core.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Data.EntityFramework.InMemory\Jbuisson.Blog.Data.EntityFramework.InMemory.csproj" />
+    <ProjectReference Include="..\Jbuisson.Blog.Data\Jbuisson.Blog.Data.csproj" />
+  </ItemGroup>
+
+</Project>
