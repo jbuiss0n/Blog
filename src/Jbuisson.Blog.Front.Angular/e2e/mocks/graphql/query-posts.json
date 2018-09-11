@@ -1,0 +1,49 @@
+{
+  "data": {
+    "posts": [
+      {
+        "id": 1,
+        "title": "This is the first blog post",
+        "canonicalTitle": "this-is-the-first-blog-post",
+        "preview": "This one is very basic.",
+        "publishedAt": "2018-09-01",
+        "viewsCount": 10,
+        "commentsCount": 20,
+        "comments": [
+          {
+            "id": 1,
+            "author": "Jbuisson",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+            "createdAt": "2018-09-11"
+          },
+          {
+            "id": 2,
+            "author": "ldegracia",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+            "createdAt": "2018-09-11"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "This is the second blog post",
+        "canonicalTitle": "this-is-the-second-blog-post",
+        "preview": "This one got a lot of views and comments to test formatting.",
+        "publishedAt": "2018-09-02",
+        "viewsCount": 10000000,
+        "commentsCount": 20000,
+        "comments": []
+      },
+      {
+        "id": 2,
+        "title": "This is the third blog post",
+        "canonicalTitle": "this-is-the-third-blog-post",
+        "preview": "This one has no views nor comments, to test conditionnal formatting.",
+        "publishedAt": "2018-09-03",
+        "viewsCount": 0,
+        "commentsCount": 0,
+        "comments": []
+      }
+    ]
+  }
+}
