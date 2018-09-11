@@ -1,7 +1,12 @@
 <div class="blog-post" *ngFor="let post of Posts">
   <h2 class="blog-post-title"><a [routerLink]="['/', post.canonicalTitle]">{{ post.title }}</a></h2>
   <p class="blog-post-meta">{{ post.publishedAt | date }}</p>
-  <p [innerHtml]="post.preview"></p>
+  <p class="blog-post-preview" [innerHtml]="post.preview"></p>
   <hr>
-  <p>{{ post.viewsCount }} views - <a [routerLink]="['/', post.canonicalTitle]" fragment="comments">{{ post.commentsCount }} comments</a></p>
+  <p>
+    <span class="blog-post-meta-views">{{ post.viewsCount | number }} views</span>
+    -
+    <a class="blog-post-meta-comments" [routerLink]="['/', post.canonicalTitle]" fragment="comments" *ngIf="post.commentsCount">{{ post.commentsCount | number }} comments</a>
+    <a class="blog-post-meta-comments" [routerLink]="['/', post.canonicalTitle]" fragment="comments" *ngIf="!post.commentsCount">no comments</a>
+  </p>
 </div><!-- /.blog-post -->

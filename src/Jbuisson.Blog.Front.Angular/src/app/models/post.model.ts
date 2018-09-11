@@ -6,4 +6,6 @@ export interface IPostModel {
   publishedAt: Date;
   viewsCount: number;
   commentsCount: number;
+
+  comments?: any[];
 }

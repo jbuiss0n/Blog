@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import * as Models from '../models';
@@ -11,13 +12,12 @@ export class PostComponent implements OnInit {
 
   public Post: Models.IPostModel;
 
-  public async ngOnInit() {
+  constructor(private route: ActivatedRoute) {
+  }
 
-
-
-    const response = await fetch('https://localhost:44394/?query={post(id:1){id,title,content,publishedAt,viewsCount,commentsCount,comments{id,author,content,createdAt}}}');
-    const json = await response.json();
-
-    this.Post = json.data.post;
+  public ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.Post = data['Post'];
+    });
   }
 }
