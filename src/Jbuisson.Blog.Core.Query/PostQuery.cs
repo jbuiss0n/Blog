@@ -1,20 +1,27 @@
 ﻿using Entities = Jbuisson.Blog.Data.Entities;
 using Jbuisson.Blog.Core.Domain;
-using Jbuisson.Blog.Data;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jbuisson.Blog.Core.Query
 {
-    public class PostQuery : Query<Post, Entities.Post>
+    public class PostQuery : Query<Post, Entities.Post>, IPostQuery
     {
         public PostQuery(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
+        }
+
+        public virtual async Task<Post> Find(string title)
+        {
+            return await m_query
+                .Where(entity => entity.CanonicalTitle == title)
+                .Select(Mapper())
+                .FirstOrDefaultAsync();
         }
 
         protected override Expression<Func<Entities.Post, Post>> Mapper()

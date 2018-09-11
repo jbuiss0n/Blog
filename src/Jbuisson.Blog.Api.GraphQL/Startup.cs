@@ -46,7 +46,7 @@ namespace Jbuisson.Blog.GraphQL
             services.AddSingleton(Configuration);
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 
-            services.AddTransient<IQuery<Post>>(provider => new PostQuery(provider));
+            services.AddTransient<IPostQuery>(provider => new PostQuery(provider));
             services.AddTransient<IQuery<Comment>>(provider => new CommentQuery(provider));
             services.AddTransient<ICommandResolver>(provider => new CommandResolver(provider));
             services.AddTransient(provider => new DesignTimeDbContextFactory().CreateDbContext(new string[] { }));
@@ -96,7 +96,7 @@ namespace Jbuisson.Blog.GraphQL
                 CanonicalTitle = "test-1",
                 Preview = "This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.",
                 Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
-                ViewsCount = 33,
+                ViewsCount = 33000000,
                 CommentsCount = 2,
                 PublishedAt = DateTime.Now.AddDays(-3),
             });

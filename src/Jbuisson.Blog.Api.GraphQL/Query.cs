@@ -11,10 +11,10 @@ namespace Jbuisson.Blog.GraphQL
 {
     public class Query
     {
-        private readonly IQuery<Post> m_postQuery;
+        private readonly IPostQuery m_postQuery;
         private readonly IQuery<Comment> m_commentQuery;
 
-        public Query(IQuery<Post> postQuery, IQuery<Comment> commentQuery)
+        public Query(IPostQuery postQuery, IQuery<Comment> commentQuery)
         {
             m_postQuery = postQuery;
             m_commentQuery = commentQuery;
@@ -25,9 +25,9 @@ namespace Jbuisson.Blog.GraphQL
             return m_postQuery.Fetch(first, offset).Result.ToList();
         }
 
-        public Post Post(int id)
+        public Post Post(string title)
         {
-            return m_postQuery.Find(id).Result;
+            return m_postQuery.Find(title).Result;
         }
 
         public List<Comment> Comments(int first, int offset)
