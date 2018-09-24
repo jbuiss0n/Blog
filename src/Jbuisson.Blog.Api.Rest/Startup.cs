@@ -29,8 +29,8 @@ namespace Jbuisson.Blog.Rest
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
             services
+                .AddCors()
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>
@@ -44,6 +44,7 @@ namespace Jbuisson.Blog.Rest
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 
             services.AddTransient<IQuery<Post>>(provider => new PostQuery(provider));
+            services.AddTransient<IPostQuery>(provider => new PostQuery(provider));
             services.AddTransient<ICommandResolver>(provider => new CommandResolver(provider));
             services.AddTransient(provider => new DesignTimeDbContextFactory().CreateDbContext(new string[] { }));
 
@@ -63,8 +64,66 @@ namespace Jbuisson.Blog.Rest
             }
 
             app.UseHttpsRedirection();
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200"));
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseMvc();
+
+            var repository = new DesignTimeDbContextFactory().CreateDbContext(new string[] { });
+
+            repository.Add(new Data.Entities.User
+            {
+                Id = 1,
+                Name = "Jbuisson",
+                Email = "contact@jbuisson.fr",
+                CreatedAt = DateTime.Now.AddMonths(-3),
+            });
+
+            repository.Add(new Data.Entities.User
+            {
+                Id = 2,
+                Name = "ldegracia",
+                Email = "contact@ldegracia.fr",
+                CreatedAt = DateTime.Now.AddMonths(-1),
+            });
+
+            repository.Add(new Data.Entities.Post
+            {
+                Id = 1,
+                Id_User = 1,
+                Title = "Test 1",
+                CanonicalTitle = "test-1",
+                Preview = "This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.",
+                Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+                ViewsCount = 33000000,
+                CommentsCount = 2,
+                PublishedAt = DateTime.Now.AddDays(-3),
+            });
+            repository.Add(new Data.Entities.Post
+            {
+                Id = 2,
+                Id_User = 1,
+                Title = "Test 2",
+                CanonicalTitle = "test-2",
+                Preview = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+                Content = "",
+                PublishedAt = DateTime.Now,
+            });
+
+            repository.Add(new Data.Entities.Comment
+            {
+                Id = 1,
+                Id_Post = 1,
+                Id_User = 1,
+                Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+            });
+            repository.Add(new Data.Entities.Comment
+            {
+                Id = 2,
+                Id_Post = 1,
+                Id_User = 2,
+                Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in felis sit amet augue viverra condimentum. Vivamus urna nisi, cursus eget enim ut, tincidunt pulvinar mi.",
+            });
+
+            repository.SaveChanges();
         }
     }
 }

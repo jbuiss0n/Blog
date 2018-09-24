@@ -15,10 +15,10 @@ namespace Jbuisson.Blog.Rest.Controllers
     [Route("posts")]
     public class PostsController : ControllerBase
     {
-        private readonly IQuery<Post> m_query;
+        private readonly IPostQuery m_query;
         private readonly ICommandResolver m_commandResolver;
 
-        public PostsController(IQuery<Post> query, ICommandResolver commandResolver)
+        public PostsController(IPostQuery query, ICommandResolver commandResolver)
         {
             m_query = query;
             m_commandResolver = commandResolver;
@@ -30,10 +30,10 @@ namespace Jbuisson.Blog.Rest.Controllers
             return (await m_query.Fetch(limit, offset)).ToList();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> Get(int id)
+        [HttpGet("{title}")]
+        public async Task<ActionResult<Post>> Get(string title)
         {
-            return await m_query.Find(id);
+            return await m_query.Find(title);
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace Jbuisson.Blog.Rest.Controllers
             return CreateOrEditResult(result.Created, result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{title}")]
         public async Task<ActionResult> Put(int id, [FromBody] PostEditCommand command)
         {
             if (id != command.Id)
@@ -55,7 +55,7 @@ namespace Jbuisson.Blog.Rest.Controllers
             return CreateOrEditResult(id, result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{title}")]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new PostDeleteCommand { Id = id };

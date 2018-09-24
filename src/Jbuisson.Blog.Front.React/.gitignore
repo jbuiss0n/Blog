@@ -9,9 +9,6 @@
 # production
 /build
 
-#reports
-/report
-
 # misc
 .DS_Store
 .env.local

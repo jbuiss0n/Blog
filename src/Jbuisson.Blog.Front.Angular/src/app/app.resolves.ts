@@ -51,6 +51,7 @@ export class PostsResolve implements Resolve<Array<Models.IPostModel>> {
       properties: [
         'id',
         'title',
+        'canonicalTitle',
         'preview',
         'publishedAt',
         'viewsCount',
