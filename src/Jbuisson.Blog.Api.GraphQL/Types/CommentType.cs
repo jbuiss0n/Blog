@@ -19,8 +19,8 @@ namespace Jbuisson.Blog.GraphQL.Types
             var offset = context.Argument<int>("offset");
 
             return await context
-                .Service<IQuery<Comment>>()
-                .For<Post>(post.Id)
+                .Service<ICommentQuery>()
+                .WithPost(post.CanonicalTitle)
                 .Fetch(first, offset);
         }
     }

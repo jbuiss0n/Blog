@@ -8,7 +8,7 @@ class PostPreview extends React.Component<Types.IPost> {
     return (
       <div className="blog-post">
         <h2 className="blog-post-title">{this.props.Title}</h2>
-        <p className="blog-post-meta">{Moment(this.props.PublishedAt).format('d MMM YYYY')} - {this.props.ViewsCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })} views</p>
+        <p className="blog-post-meta">{Moment(this.props.PublishedAt).format('MMM D, YYYY')} - {this.props.ViewsCount.toLocaleString('en-US', { minimumFractionDigits: 0 })} views</p>
         <p>{this.props.Content}</p>
         <hr />
       </div>

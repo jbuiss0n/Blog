@@ -1,16 +1,16 @@
-import Entities from './entities';
-
 import * as Types from '../types';
-import * as Constants from '../constants';
 
-const reducer = (state, action) => {
+import Entities from './entities';
+import PostReducers from './posts';
+import CommentReducers from './comments';
+
+const reducer = (state: Types.IAppState, action) => {
   const newState: Types.IAppState = {
     Entities: Entities(state, action),
   };
 
-  if (action.type === Constants.POSTS_SUCCESS) {
-    newState.Posts = action.payload.result;
-  }
+  PostReducers(newState, action);
+  CommentReducers(newState, action);
 
   return newState;
 };

@@ -43,8 +43,8 @@ namespace Jbuisson.Blog.Rest
             services.AddSingleton(Configuration);
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 
-            services.AddTransient<IQuery<Post>>(provider => new PostQuery(provider));
             services.AddTransient<IPostQuery>(provider => new PostQuery(provider));
+            services.AddTransient<ICommentQuery>(provider => new CommentQuery(provider));
             services.AddTransient<ICommandResolver>(provider => new CommandResolver(provider));
             services.AddTransient(provider => new DesignTimeDbContextFactory().CreateDbContext(new string[] { }));
 

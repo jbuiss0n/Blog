@@ -4,3 +4,14 @@
 body h1 a {
   color: #242424;
 }
+body .blog-post-meta,
+body .blog-comment-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+}
+body .blog-comment {
+  margin-left: 10px;
+  padding-left: 5px;
+  border-left: 2px solid #999;
+  margin-bottom: 1.25rem;
+}

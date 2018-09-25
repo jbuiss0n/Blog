@@ -9,14 +9,14 @@ class PostPreview extends React.Component<Types.IPost> {
     return (
       <div className="blog-post">
         <h2 className="blog-post-title"><Link to={this.props.CanonicalTitle}>{this.props.Title}</Link></h2 >
-        <p className="blog-post-meta">{Moment(this.props.PublishedAt).format('d MMM YYYY')}</p>
+        <p className="blog-post-meta">{Moment(this.props.PublishedAt).format('MMM D, YYYY')}</p>
         <p className="blog-post-preview">{this.props.Preview}</p>
         <hr />
         <p>
-          <span className="blog-post-meta-views">{this.props.ViewsCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })} views</span>
+          <span className="blog-post-meta-views">{this.props.ViewsCount.toLocaleString('en-US', { minimumFractionDigits: 0 })} views</span>
           <span> - </span>
           {this.props.CommentsCount
-            ? (<Link className="blog-post-meta-comments" to={this.props.CanonicalTitle}>{this.props.CommentsCount.toLocaleString(navigator.language, { minimumFractionDigits: 0 })} comments</Link>)
+            ? (<Link className="blog-post-meta-comments" to={this.props.CanonicalTitle}>{this.props.CommentsCount.toLocaleString('en-US', { minimumFractionDigits: 0 })} comments</Link>)
             : (<Link className="blog-post-meta-comments" to={this.props.CanonicalTitle}>no comments</Link>)}
         </p>
       </div>

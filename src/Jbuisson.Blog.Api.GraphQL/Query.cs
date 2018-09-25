@@ -12,9 +12,9 @@ namespace Jbuisson.Blog.GraphQL
     public class Query
     {
         private readonly IPostQuery m_postQuery;
-        private readonly IQuery<Comment> m_commentQuery;
+        private readonly ICommentQuery m_commentQuery;
 
-        public Query(IPostQuery postQuery, IQuery<Comment> commentQuery)
+        public Query(IPostQuery postQuery, ICommentQuery commentQuery)
         {
             m_postQuery = postQuery;
             m_commentQuery = commentQuery;

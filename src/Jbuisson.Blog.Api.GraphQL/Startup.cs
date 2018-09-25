@@ -47,7 +47,7 @@ namespace Jbuisson.Blog.GraphQL
             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 
             services.AddTransient<IPostQuery>(provider => new PostQuery(provider));
-            services.AddTransient<IQuery<Comment>>(provider => new CommentQuery(provider));
+            services.AddTransient<ICommentQuery>(provider => new CommentQuery(provider));
             services.AddTransient<ICommandResolver>(provider => new CommandResolver(provider));
             services.AddTransient(provider => new DesignTimeDbContextFactory().CreateDbContext(new string[] { }));
 

@@ -16,7 +16,5 @@ namespace Jbuisson.Blog.Core.Query
         Task<TDomain> Find(int id);
 
         Task<ICollection<TDomain>> Fetch(int limit, int offset);
-
-        IQuery<TDomain> For<TRelation>(int id) where TRelation : IDomain;
     }
 }

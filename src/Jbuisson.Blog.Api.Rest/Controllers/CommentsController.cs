@@ -16,25 +16,25 @@ namespace Jbuisson.Blog.Rest.Controllers
     [Route("posts/{post}/comments")]
     public class CommentsController : ControllerBase
     {
-        private readonly IQuery<Comment> m_query;
+        private readonly ICommentQuery m_query;
         private readonly ICommandResolver m_commandResolver;
 
-        public CommentsController(IQuery<Comment> query, ICommandResolver commandResolver)
+        public CommentsController(ICommentQuery query, ICommandResolver commandResolver)
         {
             m_query = query;
             m_commandResolver = commandResolver;
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<Comment>>> Get(int post, int limit = 10, int offset = 0)
+        public async Task<ActionResult<ICollection<Comment>>> Get(string post, int limit = 10, int offset = 0)
         {
-            return (await m_query.For<Post>(post).Fetch(limit, offset)).ToList();
+            return (await m_query.WithPost(post).Fetch(limit, offset)).ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Comment>> Get(int post, int id)
+        public async Task<ActionResult<Comment>> Get(string post, int id)
         {
-            return await m_query.For<Post>(post).Find(id);
+            return await m_query.WithPost(post).Find(id);
         }
 
         [HttpPost]

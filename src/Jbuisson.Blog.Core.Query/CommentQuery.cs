@@ -6,20 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Jbuisson.Blog.Core.Query
 {
-    public class CommentQuery : Query<Comment, Entities.Comment>
+    public class CommentQuery : Query<Comment, Entities.Comment>, ICommentQuery
     {
         public CommentQuery(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
         }
 
-        public override IQuery<Comment> For<TRelation>(int id)
+        public virtual ICommentQuery WithPost(string title)
         {
-            if (typeof(TRelation) == typeof(Post))
-                m_query = m_query.Where(comment => comment.Id_Post == id);
+            m_query = m_query
+                .Where(comment => comment.Post.CanonicalTitle == title);
 
             return this;
         }
@@ -29,6 +30,7 @@ namespace Jbuisson.Blog.Core.Query
             return comment => new Comment
             {
                 Id = comment.Id,
+                Id_Post = comment.Id_Post,
                 Author = comment.User.Name,
                 Content = comment.Content,
                 CreatedAt = comment.CreatedAt,

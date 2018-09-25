@@ -5,12 +5,14 @@ import { Action } from 'redux-actions';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import PostDetails from '../components/post-details';
+import Comment from '../components/comment';
 
 import * as Types from '../types';
 import * as Actions from '../actions';
 
 interface IPostDispatchProps {
   LoadPost: () => Promise<Action<Actions.IApiResult<Types.IPost>>>;
+  LoadComments: () => Promise<Action<Actions.IApiResult<Types.IComment[]>>>;
 }
 
 interface IPostStateProps {
@@ -25,23 +27,28 @@ interface IPostRouteProps {
 class Post extends React.Component<IPostDispatchProps & IPostStateProps & RouteComponentProps<IPostRouteProps>, Types.IAppState> {
 
   public async componentDidMount() {
-    await this.props.LoadPost();
+
+    if (!this.props.Comments) {
+      await this.props.LoadComments();
+    }
+    if (!this.props.Post) {
+      await this.props.LoadPost();
+    }
   }
 
   public render() {
-
     const { Post, Comments } = this.props;
 
     if (!Post) {
-      return (<div>loading...</div>);
+      return (<div>Loading...</div>);
     }
 
     return (
-      <div>
+      <div className="post">
         <PostDetails {...Post} />
-        <div>{Comments
-          ? Comments.map(comment => <div key={comment.Id}>{comment.Content}</div>)
-          : <div>loading...</div>}
+        <div className="post-comments">{Comments
+          ? Comments.map(comment => <Comment key={comment.Id} {...comment} />)
+          : <div>Loading comments...</div>}
         </div>
       </div>
     );
@@ -60,6 +67,7 @@ const mapStateToProps = (state: Types.IAppState, route: RouteComponentProps<IPos
 const mapDispatchToProps = (dispatch, route: RouteComponentProps<IPostRouteProps>): IPostDispatchProps => {
   return {
     LoadPost: () => dispatch(Actions.POST_TITLE_REQUEST(route.match.params.title)),
+    LoadComments: () => dispatch(Actions.POST_COMMENTS_REQUEST(route.match.params.title)),
   };
 }
 

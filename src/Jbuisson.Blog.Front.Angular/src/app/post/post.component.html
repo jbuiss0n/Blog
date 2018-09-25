@@ -1,6 +1,6 @@
 <div class="blog-post">
   <h2 class="blog-post-title">{{ Post.title }}</h2>
-  <p class="blog-post-meta">{{ Post.publishedAt | date }} - {{ Post.viewsCount }} views</p>
+  <p class="blog-post-meta">{{ Post.publishedAt | date }} - {{ Post.viewsCount | number }} views</p>
   <p [innerHtml]="Post.content"></p>
   <hr>
 </div><!-- /.blog-post -->

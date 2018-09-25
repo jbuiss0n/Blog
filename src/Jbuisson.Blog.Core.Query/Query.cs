@@ -23,15 +23,6 @@ namespace Jbuisson.Blog.Core.Query
             m_query = serviceProvider.GetService<EntityContext>().Set<TEntity>();
         }
 
-        public virtual IQuery<TDomain> For<TRelation>(int id)
-            where TRelation : IDomain
-        {
-            if (typeof(TRelation) == typeof(TDomain))
-                m_query = m_query.Where(entity => entity.Id == id);
-
-            return this;
-        }
-
         public virtual async Task<int> Count()
         {
             return await m_query.CountAsync();

@@ -20,7 +20,9 @@ interface IHomeStateProps {
 class Home extends React.Component<IHomeDispatchProps & IHomeStateProps, Types.IAppState> {
 
   public async componentDidMount() {
-    await this.props.LoadPosts();
+    if (!this.props.Posts) {
+      await this.props.LoadPosts();
+    }
   }
 
   public render() {
